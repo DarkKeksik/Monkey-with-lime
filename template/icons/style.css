@@ -1,0 +1,108 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?jariqh');
+  src:  url('fonts/icomoon.eot?jariqh#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.ttf?jariqh') format('truetype'),
+    url('fonts/icomoon.woff?jariqh') format('woff'),
+    url('fonts/icomoon.svg?jariqh#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-cocktail1:before {
+  content: "\e909";
+}
+.icon-cocktail2:before {
+  content: "\e90a";
+}
+.icon-cocktail3:before {
+  content: "\e90b";
+}
+.icon-sh:before {
+  content: "\e90c";
+}
+.icon-add:before {
+  content: "\e907";
+}
+.icon-close:before {
+  content: "\e908";
+}
+.icon-zoom:before {
+  content: "\e900";
+}
+.icon-question:before {
+  content: "\e901";
+}
+.icon-arrow-down:before {
+  content: "\e902";
+}
+.icon-team:before {
+  content: "\e903";
+}
+.icon-refresh:before {
+  content: "\e904";
+}
+.icon-logout:before {
+  content: "\e905";
+}
+.icon-minimize:before {
+  content: "\e906";
+}
+.icon-user:before {
+  content: "\e971";
+}
+.icon-users:before {
+  content: "\e972";
+}
+.icon-user-plus:before {
+  content: "\e973";
+}
+.icon-user-minus:before {
+  content: "\e974";
+}
+.icon-bubbles41:before {
+  content: "\e975";
+}
+.icon-spinner9:before {
+  content: "\e982";
+}
+.icon-bug:before {
+  content: "\e999";
+}
+.icon-terminal:before {
+  content: "\ea81";
+}
+.icon-google-plus2:before {
+  content: "\ea8c";
+}
+.icon-facebook2:before {
+  content: "\ea91";
+}
+.icon-instagram:before {
+  content: "\ea92";
+}
+.icon-telegram:before {
+  content: "\ea95";
+}
+.icon-vk:before {
+  content: "\ea98";
+}
+.icon-star-full:before {
+  content: "\1f331";
+}
