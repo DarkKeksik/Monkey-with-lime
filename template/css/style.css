@@ -74,9 +74,63 @@ a {
   align-content: center;
 }
 .main__sh {
+  position: relative;
   text-align: right;
   color: white;
 }
+@keyframes stir {
+  10% {
+    transform: rotate(10deg);
+  }
+  20% {
+    transform: rotate(20deg);
+  }
+  30% {
+    transform: rotate(30deg);
+  }
+  40% {
+    transform: rotate(40deg);
+  }
+  50% {
+    transform: rotate(50deg);
+  }
+  60% {
+    transform: rotate(40deg);
+  }
+  70% {
+    transform: rotate(30deg);
+  }
+  80% {
+    transform: rotate(20deg);
+  }
+  90% {
+    transform: rotate(10deg);
+  }
+}
 .main__sh-item {
+  display: inline-block;
   font-size: 8.75rem;
+  transition-duration: .3s;
+}
+.main__sh-item_outside {
+  position: relative;
+  z-index: 1;
+  cursor: pointer;
+}
+.main__sh-item_outside-active {
+  animation: stir 0.7s linear infinite;
+}
+.main__sh-item_outside:hover {
+  transform: rotate(30deg);
+}
+.main__sh-item_inside {
+  position: absolute;
+  font-size: 2.3rem;
+  top: 3.65rem;
+  right: 2.6rem;
+  color: #9d54c5;
+  background: #eed145;
+  border-radius: 100%;
+  padding: .25rem;
+  transition-duration: .3s;
 }
