@@ -4,15 +4,13 @@
 }
 
 @import url('https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap');
+body { font-family: "Roboto"; }
+a { text-decoration: none; }
 
 @font-face {
     font-family: Chulok;
-    /* Имя шрифта */
     src: url("../fonts/Rozovii Chulok.ttf");
 }
-
-body { font-family: "Roboto"; }
-a { text-decoration: none; }
 
 @keyframes stir {
     10% { transform: rotate(10deg) translateX(0) translateY(0); }
@@ -84,18 +82,42 @@ a { text-decoration: none; }
         }
     }    
     &__section {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
         height: 100vh;
-        background: #0b0b0b;
-
+        
+        &-first {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }        
+        &-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            &-img {
+                background-image: url(https://s1.1zoom.ru/big0/198/Cocktail_Drinks_Lemons_453316.jpg);
+                height: 100%;
+                background-size: cover;
+                background-repeat: no-repeat;
+            }
+            &-color {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: #000000;
+                opacity: 0.8;
+            }
+        }
         &-one {
             max-width: 64rem;
+            width: 100%;
             border: 10px solid #171717;
             padding: 10px;
-            border-radius: 10px;
+            border-radius: .875rem;
             background: #1f1f1f;
             z-index: 1;
         }
@@ -103,7 +125,6 @@ a { text-decoration: none; }
         &-header {
             background: #0f0f0f;
             border-radius: .875rem;
-            padding: .875rem;
             border: .875rem solid #131313;
             grid-column-start: 1;
             grid-column-end: 3;
@@ -114,13 +135,13 @@ a { text-decoration: none; }
             font-size: 2.8rem;
             border-bottom: .375rem solid #79349f;
             font-family: "Chulok";
-
+            text-align: center;
         }
 
         &-description {
             color: white;
             max-width: 25.625rem;
-            margin: .875rem auto 0 auto;
+            margin: .875rem auto .875rem auto;
         }
 
         &-button {
@@ -135,7 +156,7 @@ a { text-decoration: none; }
     &__sh {
         position: relative;
         display: grid;
-        grid-template-columns: 1fr .2fr;
+        grid-template-columns: 1fr .1fr;
         margin-top: 2rem;
         color: white;
 
