@@ -83,7 +83,7 @@ a {
   background: #453150;
 }
 .main__title {
-  font-size: 25px;
+  font-size: 2rem;
   border-bottom: 4px solid #79349f;
   padding-bottom: 5px;
   text-align: center;
@@ -94,6 +94,28 @@ a {
   transform: translate(-1rem, -6px);
   color: #eed145;
   position: absolute;
+}
+.main__forHide {
+  position: relative;
+  background: #1f1f1f;
+}
+.main__wrap {
+  position: relative;
+  background: #1f1f1f;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.main__wrap-preload {
+  position: absolute;
+  width: 150px;
+  height: 150px;
+  background-image: url(https://i.giphy.com/media/l46CmodtxaTWfVtEQ/giphy.webp);
+  background-size: cover;
+  top: 0;
+  background-position: center;
+  border-radius: 100px;
+  left: 45%;
 }
 .main__section {
   height: 100vh;
@@ -165,7 +187,7 @@ a {
   position: relative;
   display: grid;
   grid-template-columns: 1fr .1fr;
-  margin-top: 2rem;
+  margin: 3rem;
   color: white;
 }
 .main__sh-item {
