@@ -17,17 +17,17 @@
     <main class="main">
         <!-- 1 блок под информацию -->
         <section class="main__section main__section-first">
-           
+
             <!-- Под фон -->
             <div class="main__section-bg">
                 <div class="main__section-bg-img"></div>
                 <div class="main__section-bg-color"></div>
             </div>
-            
+
             <div id="particle" class="particle"></div>
             <div class="main__section-one">
                 <header class="main__section-header">
-                    <h1 class="main__section-title">Мы знаем как сделать вечеринку веселее!</h1>
+                    <h1 class="main__section-title c-white">Мы знаем как сделать вечеринку веселее!</h1>
                     <p class="main__section-description">
                         Наш cервис позволить вам узнать рецепт, пропорции и историю любого коктеля, который есть у нас в базе! <br /> P.S. Рецепты пополняются когда админ не пьян.
                     </p>
@@ -80,11 +80,28 @@
         <!-- 2 блок под рецепты -->
         <section class="main__section">
 
+            <div class="main__section-two">
+                <h2 class="main__section-title c-silver">Генератор коктелей</h2>
+                <div class="main__section-wrap">
+                    <div class="main__section-search">
+                        <input class="main__section-search-input" type="search" placeholder="Введите название ингредиента и нажмите на enter" />
+                    </div>
+                    <div class="main__section-aside"></div>
+                    <div class="main__section-content">
+                        <div class="main__section-content-all">
+                            <h3 class="main__section-content-all-title">Возможные рецепты</h3>
+                            <div class="main__section-content-all-wrap"></div>
+                        </div>
+                        <div class="main__section-content-details"></div>
+                    </div>
+                </div>
+            </div>
+
         </section>
     </main>
-
+    
     <footer class="footer"></footer>
-
+    
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="template/vendors/particles.min.js"></script>
     <script src="template/vendors/particlesConf.js"></script>

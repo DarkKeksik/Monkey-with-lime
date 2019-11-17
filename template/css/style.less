@@ -32,6 +32,9 @@ a { text-decoration: none; }
     height: 100%;
 }
 
+.c-white { color: white; }
+.c-silver { color: #333; }
+
 .button {
     display: inline-block;
     color: #0b0b0b;
@@ -154,7 +157,6 @@ a { text-decoration: none; }
         }
 
         &-title {
-            color: white;
             font-size: 2.8rem;
             border-bottom: .375rem solid #79349f;
             font-family: "Chulok";
@@ -173,6 +175,67 @@ a { text-decoration: none; }
             justify-content: center;
             align-content: center;
             text-align: center;
+        }
+        &-two { padding-top: .875rem; }
+        &-wrap {
+            display: grid;
+            grid-template-columns: 0.5fr 1.5fr;
+            grid-gap: 1rem;
+            max-width: 64rem;
+            width: 100%;
+            margin: 0 auto;
+        }
+        &-search {
+            grid-column-start: 1;
+            grid-column-end: 3;
+            margin-top: 2rem;
+            
+            &-input {
+                width: 100%;
+                padding: .435rem;
+                border: 0;
+                border-bottom: 2px solid #1f1f1f;
+                font-size: 1.2rem;
+                transition-duration: .3s;
+                
+                &:focus {
+                    outline: none;
+                    border-color: #79349f;
+                }
+            }
+        }
+        &-aside {
+            &-item {
+                padding: .450rem;
+                border-bottom: 3px solid #333;
+                font-weight: 700;
+                letter-spacing: 1px;
+                cursor: pointer;
+                user-select: none;
+                transition-duration: .3s;
+                
+                &:hover { border-color: #79349f; }
+                &_active { background: #eed145; }
+            }
+        }
+        
+        &-content {
+            &-all {
+                &-title {
+                    font-size: 1.6rem;
+                    margin-bottom: 0.5rem;
+                }
+                &-link {
+                    font-weight: 700;
+                    letter-spacing: 1px;
+                    color: #79349f;
+                    cursor: pointer;
+                    padding: .3rem 1rem;
+                    transition-duration: .3s;
+                    
+                    &:hover { background: #fff8d6; }
+                }
+            }
         }
     }
 

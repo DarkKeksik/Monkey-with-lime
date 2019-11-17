@@ -1,5 +1,6 @@
 $( document ).ready(function() {
-    // Массив коктелей под первый блок
+    
+    // Массив коктелей под первый блок    
     let dict = {
         "icon-cocktail1": {
             "title": "Мохито",
@@ -64,7 +65,7 @@ $( document ).ready(function() {
                     "price": "-"
                 },
                 3: {
-                    "name": "Лед в кубиках",
+                    "name": "Лед",
                     "proportion": "60 грамм",
                     "price": "-"
                 }
@@ -93,6 +94,27 @@ $( document ).ready(function() {
             }
         }
     };
+    
+    // Массив со всеми ингредиентами
+    let dictIngredients = [];
+    Object.keys(dict).forEach((itemFirst) => {
+        let composition = dict[itemFirst]["composition"];
+
+        Object.keys( composition ).forEach((itemSecond) => {
+            // Проверяем был ли в массив ранее добавлен элемент
+            if( dictIngredients.indexOf(composition[itemSecond]["name"]) == -1 ) {
+                dictIngredients.push(composition[itemSecond]["name"]);
+            }
+        });
+    });
+    
+    // Отсортировываем по алфавиту
+    let dictIngredientsSort = dictIngredients.sort();
+    
+    // Наполняем aside во 2 секции
+    dictIngredientsSort.forEach((item) => {
+        $(".main__section-aside").append(`<p class="main__section-aside-item">${item}</p>`); 
+    });
     
     // При клике на 1 секцию на 1 блоке
     $( document ).on("click", ".main__sh-item_outside", function() {
@@ -132,4 +154,71 @@ $( document ).ready(function() {
             $(".main__forHide").slideDown();
         }, 1000);
     });
+    
+    // При клике на ингредиент во второй секции
+    $( document ).on("click", ".main__section-aside-item", function() {
+        $( this ).toggleClass("main__section-aside-item_active");
+        
+        // Наполняем массив выбранными ингредиентами
+        let arrSelected = [];
+        $(".main__section-aside-item_active").each(function() {
+            arrSelected.push( $( this ).text() );
+        });
+        
+        // Перебираем ингредиенты в поиске подходящих рецептов
+        let recipeResult = [];
+        // Перебираем основной массив и сравниваем выбранными ингредиенты
+        Object.keys(dict).forEach((itemFirst)=>{
+            let dictItem = dict[itemFirst],
+                ingredienAll = [],
+                cocktailName = "";
+                
+            Object.keys(dictItem["composition"]).forEach((itemSecond)=>{
+                
+                // Все ингредиенты в напитке
+                let nameIngredientInArr = dictItem["composition"][itemSecond]["name"];
+                ingredienAll.push( nameIngredientInArr );
+                cocktailName = dictItem["title"];
+            });
+            
+            // Проверяем содержатся ли выбранные ингредиенты в коктейле
+            let checkExistIngredient = true;
+            arrSelected.forEach((itemThird) => {
+                if (ingredienAll.indexOf(itemThird) == -1) {
+                    checkExistIngredient = false;
+                }
+            });
+            
+            // Итоговая проверка и добавление в возможные коктейли
+            if (checkExistIngredient) {
+                recipeResult.push(cocktailName);
+            }
+            
+            
+        });
+        
+        // Добавляем рецепты
+        $(".main__section-content-all-wrap").empty();
+        recipeResult.forEach((item)=>{
+            $(".main__section-content-all-wrap").append(`<p class="main__section-content-all-link">${item}</p>`);
+        });
+    });
+    
+    
+    // При вводе в поиск по ингредиентам
+    $( document ).on("keyup", ".main__section-search-input", function() {
+        let val = $( this ).val();
+        
+        // Создаем свой :Contains (теперь не регистрозависимый)
+        $.expr[":"].Contains = jQuery.expr.createPseudo(function(arg) {
+            return function( elem ) {
+                return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+            };
+        });
+        
+        $(`.main__section-aside-item:not('.main__section-aside-item_active')`).hide();
+        $(`.main__section-aside-item:Contains('${val}')`).show();
+        if (val = "") $(`.main__section-aside-item`).show();
+    });
+    
 });
