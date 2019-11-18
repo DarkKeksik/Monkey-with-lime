@@ -5,7 +5,7 @@ $( document ).ready(function() {
         "icon-cocktail1": {
             "title": "Мохито",
             "subTitle": "алк. коктель",
-            "desc": "Описание коктеля",
+            "desc": "Тут способ приготовления коктейля",
             "composition": {
                 0: {
                     "name": "Белый ром",
@@ -42,7 +42,7 @@ $( document ).ready(function() {
         "icon-cocktail2": {
             "title": "Апероль Шприц",
             "subTitle": "алк. коктель",
-            "desc": "Описание коктеля",
+            "desc": "Тут способ приготовления коктейля",
             "composition": {
                 0: {
                     "name": "Апероль",
@@ -74,7 +74,7 @@ $( document ).ready(function() {
         "icon-cocktail3": {            
             "title": "Маргарита",
             "subTitle": "алк. коктель",
-            "desc": "Описание коктеля",
+            "desc": "Тут способ приготовления коктейля",
             "composition": {
                 0: {
                     "name": "Серебряная текила",
@@ -132,7 +132,7 @@ $( document ).ready(function() {
             $(".table__content").empty();
             
             Object.keys(dict[randomCocktail]["composition"]).forEach((i)=>{
-                $(".table__content").append(`
+                $(".main__sh .table__content").append(`
                     <tr class="table__row">
                         <td class="table__item table__text">${dict[randomCocktail]["composition"][i]["name"]}</td>
                         <td class="table__item table__text">${dict[randomCocktail]["composition"][i]["proportion"]}</td>
@@ -159,6 +159,11 @@ $( document ).ready(function() {
     $( document ).on("click", ".main__section-aside-item", function() {
         $( this ).toggleClass("main__section-aside-item_active");
         
+        // Скрываем детальную информацию и показываем все найденные коктели
+        $(".main__section-content-details").slideUp(function() {
+            $(".main__section-content-all").slideDown();
+        });
+        
         // Наполняем массив выбранными ингредиентами
         let arrSelected = [];
         $(".main__section-aside-item_active").each(function() {
@@ -166,15 +171,14 @@ $( document ).ready(function() {
         });
         
         // Перебираем ингредиенты в поиске подходящих рецептов
-        let recipeResult = [];
+        let recipeResult = {};
         // Перебираем основной массив и сравниваем выбранными ингредиенты
         Object.keys(dict).forEach((itemFirst)=>{
             let dictItem = dict[itemFirst],
                 ingredienAll = [],
                 cocktailName = "";
                 
-            Object.keys(dictItem["composition"]).forEach((itemSecond)=>{
-                
+            Object.keys(dictItem["composition"]).forEach((itemSecond) => {
                 // Все ингредиенты в напитке
                 let nameIngredientInArr = dictItem["composition"][itemSecond]["name"];
                 ingredienAll.push( nameIngredientInArr );
@@ -191,17 +195,28 @@ $( document ).ready(function() {
             
             // Итоговая проверка и добавление в возможные коктейли
             if (checkExistIngredient) {
-                recipeResult.push(cocktailName);
+                recipeResult[itemFirst] = cocktailName;
             }
             
             
         });
         
-        // Добавляем рецепты
+        // Добавляем рецепты если был выбран ингредиент
         $(".main__section-content-all-wrap").empty();
-        recipeResult.forEach((item)=>{
-            $(".main__section-content-all-wrap").append(`<p class="main__section-content-all-link">${item}</p>`);
-        });
+        
+        if ( arrSelected.length > 0 ) {
+            Object.keys(recipeResult).forEach((item) => {
+                $(".main__section-content-all-wrap").append(`
+                    <p data-dictkey="${item}" class="main__section-content-all-link">${recipeResult[item]}</p>
+                `);
+            });
+        } else {
+            $(".main__section-content-all-wrap").append(`
+                <p class="main__section-content-all-hint">
+                    Выберите ингредиент для поиска подходящих вам коктелей
+                </p>
+            `);
+        }
     });
     
     
@@ -210,15 +225,49 @@ $( document ).ready(function() {
         let val = $( this ).val();
         
         // Создаем свой :Contains (теперь не регистрозависимый)
-        $.expr[":"].Contains = jQuery.expr.createPseudo(function(arg) {
+        $.expr[":"].Contains = $.expr.createPseudo(function(arg) {
             return function( elem ) {
-                return jQuery(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
+                return $(elem).text().toUpperCase().indexOf(arg.toUpperCase()) >= 0;
             };
         });
         
-        $(`.main__section-aside-item:not('.main__section-aside-item_active')`).hide();
+        $(`.main__section-aside-item`).hide();
         $(`.main__section-aside-item:Contains('${val}')`).show();
         if (val = "") $(`.main__section-aside-item`).show();
+        
+        // При клике на ингредиент после его поиска очищаем поле
+        $( document ).on("click", ".main__section-aside-item", function() {
+            $(".main__section-search-input").val("");
+            $(".main__section-aside-item").show();
+        });
+        
     });
     
+    // При клике на рецепт во второй секции
+    $( document ).on("click", ".main__section-content-all-link", function() {
+        $(".main__section-aside-item_active").removeClass("main__section-aside-item_active");
+        $(".main__section-content-all").slideUp(function() {
+            $(".main__section-content-details").slideDown();
+        });
+        
+        let cocktailKey = $( this ).data("dictkey");
+        
+        $(".main__section-content-details .main__title").text(dict[cocktailKey]["title"]);
+        $(".main__section-content-details .table__content").empty();
+        
+        // Расходники
+        Object.keys(dict[cocktailKey]["composition"]).forEach((i)=>{
+            $(".main__section-content-details .table__content").append(`
+                <tr class="table__row">
+                    <td class="table__item table__text">${dict[cocktailKey]["composition"][i]["name"]}</td>
+                    <td class="table__item table__text">${dict[cocktailKey]["composition"][i]["proportion"]}</td>
+                    <td class="table__item table__text">${dict[cocktailKey]["composition"][i]["price"]}</td>
+                </tr>
+            `);
+        });
+        
+        // Описание
+        $(".main__section-content-details-description").text(dict[cocktailKey]["desc"]);
+        
+    });
 });
