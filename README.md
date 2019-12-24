@@ -1,3 +1,4 @@
-# Monkey-with-lime
+# Easyshaker
 
-Bar cocktails, it's easy!
+Коктейли для вечеринки это к нам
+http://easyshaker.ru/
